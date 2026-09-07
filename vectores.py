@@ -15,7 +15,10 @@ impares = [1, 3, 5, 7, 9]
 vec = vectores(pares)
 vec_np = vectores(impares)
 
-print(f"Pares: \n{vec.mostrar()} \n Impares: \n{vec_np.mostrar()}")
+print("Pares:")
+{vec.mostrar()}
+print("Impares:")
+vec_np.mostrar()
 
 print(f"Media {vec.media()} de pares | Media {vec_np.media()} de impares")
 
