@@ -1,12 +1,7 @@
-"""Suma los elementos de dos colas por posición."""
 from cola import Cola
 
 
 def sumar_colas(cola_a, cola_b):
-    """Devuelve una nueva cola sin modificar las originales.
-
-    Se requieren colas de igual longitud y con números enteros.
-    """
     if len(cola_a) != len(cola_b):
         raise ValueError("Las dos colas deben tener la misma cantidad de elementos.")
     if any(type(n) is not int for n in cola_a) or any(

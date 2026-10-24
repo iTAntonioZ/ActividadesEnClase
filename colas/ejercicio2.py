@@ -1,4 +1,3 @@
-"""Simulación de atención por servicio en una compañía de seguros."""
 from cola import Cola
 
 
