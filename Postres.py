@@ -212,7 +212,7 @@ class SistemaRecetario:
                         nuevos_pasos += 1
             if persistir:
                 self.guardar_en_disco()
-            return True, f"'{nombre_limpio}' ya existía: Se fusionaron {nuevos_ing} ingrediente(s) y {nuevos_pasos} paso(s) sin duplicar."
+            return True, f"'{nombre_limpio}' ya existía: Se fusionaron sus elementos sin duplicar."
 
         nuevo = Postre(nombre_limpio)
         if lista_ing:
@@ -222,6 +222,7 @@ class SistemaRecetario:
             for item in lista_pasos:
                 nuevo.pasos.insertar(item)
 
+        # Inserción ordenada alfabéticamente en el arreglo
         pos = 0
         while pos < len(self.postres) and self.postres[pos].nombre.lower() < nuevo.nombre.lower():
             pos += 1
@@ -229,7 +230,8 @@ class SistemaRecetario:
 
         if persistir:
             self.guardar_en_disco()
-        return True, f"Postre '{nombre_limpio}' registrado en posición {pos}."
+        # Mensaje limpio solicitado
+        return True, "Se añadió un nuevo postre."
 
     def dar_de_baja_postre(self, nombre):
         idx = self.buscar_indice(nombre)
@@ -258,6 +260,7 @@ class SistemaRecetario:
         postre = self.postres.pop(idx)
         postre.nombre = nombre_nuevo
 
+        # Reubicación para mantener el orden alfabético
         pos = 0
         while pos < len(self.postres) and self.postres[pos].nombre.lower() < postre.nombre.lower():
             pos += 1
@@ -499,6 +502,10 @@ class AppPostresFinal(tk.Tk):
         return self.sistema.postres[idx] if idx != -1 else None
 
     def _refrescar_lista_postres(self, sel_nombre=None):
+        """Actualiza el listbox de postres garantizando el orden alfabético."""
+        # Se reasegura el orden alfabético
+        self.sistema.postres.sort(key=lambda x: x.nombre.lower())
+
         self.list_postres.delete(0, tk.END)
         idx_destino = 0
         for i, p in enumerate(self.sistema.postres):
@@ -815,8 +822,10 @@ class AppPostresFinal(tk.Tk):
             exito, msg = self.sistema.dar_de_alta_postre(nombre, lista_ing, lista_pasos)
             modal.destroy()
             self.txt_filtro.delete(0, tk.END)
+            # Ordena alfabéticamente y enfoca el postre añadido
             self._refrescar_lista_postres(nombre)
             self.barra_estado.config(text=msg)
+            # Muestra el mensaje limpio solicitado
             messagebox.showinfo("Registro", msg)
 
         BotonPlano(frame_botones, text="Cancelar", bg="#94A3B8", command=modal.destroy).pack(side=tk.RIGHT, padx=(6, 0))
