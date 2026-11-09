@@ -1,0 +1,72 @@
+ADA7 - RUTAS MÉXICO: INTERFAZ INTERACTIVA
+
+INICIO RÁPIDO
+1. Descomprime el ZIP completo en una carpeta.
+2. Instala Python 3.9 o superior si no lo tienes.
+3. Abre una terminal en esa carpeta y ejecuta:
+   python programa_grafos.py
+   En Windows también puedes usar: py programa_grafos.py
+4. El navegador abrirá la interfaz automáticamente.
+   Mantén la terminal abierta y usa Ctrl+C cuando termines.
+   Si el navegador no abre, copia la dirección local que muestra la terminal.
+
+No necesitas instalar paquetes de Python ni obtener una clave de Google.
+Conserva programa_grafos.py e interfaz.html en la misma carpeta.
+
+CONTROLES
+- Estado de salida: elige cualquiera de los siete estados.
+- Sin repetir / Con repetición: compara los dos costos mínimos.
+- Pasos: consulta cada visita y el costo del traslado anterior.
+- Estados y relaciones: muestra todas las conexiones y sus costos.
+- Haz clic en un estado para consultar sus vecinos.
+- Usa +, -, la rueda o arrastra el grafo para explorar. El botón de centrado
+  restablece la vista. Los marcadores muestran el número de cada visita.
+- Grafo: vista esquemática disponible sin internet.
+- Mapa geográfico: usa Leaflet y OpenStreetMap; requiere internet.
+  Los puntos se ubican aproximadamente en las capitales estatales.
+  El recorrido seleccionado sigue carreteras entre las capitales, utilizando
+  el servicio público OSRM. Muestra distancia y tiempo estimados, sin tráfico
+  ni paradas. Se conserva el orden de todas las visitas, incluso las repetidas.
+  Los costos del ejercicio no se sustituyen por peajes o combustible.
+  El trayecto físico puede atravesar otros estados: la condición de no
+  repetir se aplica a los nodos visitados del grafo, no al territorio cruzado.
+  Si falla el servicio de rutas, aparece un aviso con Reintentar; no se
+  dibujan líneas rectas como si fueran carreteras. Las rutas obtenidas se
+  reutilizan durante la sesión. Cambiar de recorrido cancela la consulta anterior.
+  Si no carga el mapa, puedes seguir usando la vista Grafo.
+
+ARCHIVOS
+programa_grafos.py: algoritmos Python, generación del HTML y servidor local.
+interfaz.html: plantilla de la interfaz (HTML, CSS y JavaScript).
+grafo_estados.html: interfaz ya generada; puedes abrirla directamente para
+usar el grafo sin iniciar Python. Para el mapa geográfico, ejecuta el programa.
+vista_previa.png: captura de la interfaz.
+
+OPCIONES
+python programa_grafos.py --solo-html
+Genera el HTML y muestra los resultados de Jalisco sin iniciar el servidor.
+--dibujar sigue siendo compatible; ahora la interfaz se abre por defecto.
+
+MODELO
+Grafo no dirigido y ponderado: siete estados, once conexiones, costos
+académicos en MXN. No son tarifas reales. Se visita cada estado y el destino
+es libre; no hay obligación de regresar al origen. El recorrido B debe
+repetir al menos un estado y puede reutilizar conexiones.
+Python calcula ambos recorridos para cada posible origen. La interfaz
+presenta esos resultados; no sustituye los algoritmos del ejercicio.
+A usa backtracking para encontrar el camino hamiltoniano de menor costo.
+B usa Dijkstra sobre (ubicación, máscara de visitados, hubo repetición).
+
+RESULTADOS DESDE JALISCO
+A: Jalisco -> Michoacán -> Guanajuato -> Querétaro -> Hidalgo ->
+Estado de México -> Puebla. Total: $1,400 MXN.
+B: Jalisco -> Michoacán -> Guanajuato -> Querétaro -> Hidalgo ->
+Estado de México -> Hidalgo -> Puebla. Total: $1,630 MXN.
+
+FUENTES DEL MAPA
+Leaflet 1.9.4: https://leafletjs.com/download
+OpenStreetMap: https://www.openstreetmap.org/copyright
+Política de mapas: https://operations.osmfoundation.org/policies/tiles/
+La interfaz es independiente y no está afiliada con Google Maps.
+
+Rutas por carretera: https://project-osrm.org/docs/v5.22.0/api/
