@@ -1,4 +1,3 @@
-
 class MezclaDirecta:
 
     def mezclar(self, izquierda, derecha):
@@ -27,7 +26,6 @@ class MezclaDirecta:
         tamaño = 1
         n = len(resultado)
 
-        # Aumentamos el tamaño de los bloques
         while tamaño < n:
 
             nueva_lista = []
@@ -40,7 +38,6 @@ class MezclaDirecta:
                     i + tamaño:i + tamaño * 2
                 ]
 
-                # Combinamos los bloques
                 nueva_lista.extend(
                     self.mezclar(izquierda, derecha)
                 )
@@ -51,7 +48,6 @@ class MezclaDirecta:
         return resultado
 
 
-# Ejemplo de uso
 numeros = [42, 16, 8, 53, 21, 4, 37, 11, 29]
 
 metodo = MezclaDirecta()

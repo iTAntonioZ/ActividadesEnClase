@@ -1,4 +1,3 @@
-
 class Intercalacion:
 
     def ordenar(self, lista1, lista2):
@@ -7,7 +6,6 @@ class Intercalacion:
         i = 0
         j = 0
 
-        # Comparamos los elementos de ambas listas
         while i < len(lista1) and j < len(lista2):
 
             if lista1[i] <= lista2[j]:
@@ -17,7 +15,6 @@ class Intercalacion:
                 resultado.append(lista2[j])
                 j += 1
 
-        # Agregamos los elementos que quedaron pendientes
         while i < len(lista1):
             resultado.append(lista1[i])
             i += 1
@@ -29,7 +26,6 @@ class Intercalacion:
         return resultado
 
 
-# Ejemplo de uso
 lista1 = [4, 9, 15, 28, 36]
 lista2 = [2, 7, 12, 19, 31]
 
